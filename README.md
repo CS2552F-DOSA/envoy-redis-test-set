@@ -8,51 +8,56 @@ git clone git@github.com:CS2552F-DOSA/envoy_with_redis.git
 
 
 
-### Run
+### Run redis prod and redis test
 
 ```bash
-cd envoy_with_redis/examples/redis1
+# Run redis prod with envoy
+cd envoy_with_redis/examples/redis-prod
 docker-compose pull
 docker-compose up --build -d
 
-cd envoy_with_redis/examples/redis2
+# Run redis test with envoy
+cd ../redis-test
 docker-compose pull
 docker-compose up --build -d
 ```
 
-### Test
+### Test the connectivity for redis test and redis prod
 
 ```bash
-$ redis-cli -h localhost -p 1999 set foo foo
+# Test for redis prod with envoy
+$ redis-cli -h localhost -p 1999 set foo foo-prod
 OK
-$ redis-cli -h localhost -p 1999 set bar bar
+$ redis-cli -h localhost -p 1999 set bar bar-prod
 OK
 $ redis-cli -h localhost -p 1999 get foo
-"foo"
+"foo-prod"
 $ redis-cli -h localhost -p 1999 get bar
-"bar"
+"bar-prod"
 
-
-$ redis-cli -h localhost -p 1998 set foo foo2
+# Test for redis test with envoy
+$ redis-cli -h localhost -p 1998 set foo foo-test
 OK
-$ redis-cli -h localhost -p 1998 set bar bar2
+$ redis-cli -h localhost -p 1998 set bar bar-test
 OK
 $ redis-cli -h localhost -p 1998 get foo
-"foo2"
+"foo-test"
 $ redis-cli -h localhost -p 1998 get bar
-"bar2"
+"bar-test"
 ```
 
 
 
 
-### Stop
+### Stop redis prod and redis test
 
 ```bash
-cd envoy_with_redis/examples/redis1
+# Stop redis prod with envoy
+cd ../redis-prod
 docker-compose down
 
-cd envoy_with_redis/examples/redis2
+# Stop redis test with envoy
+cd ../redis-test
 docker-compose down
 ```
 
