@@ -10,11 +10,11 @@ services:
     networks:
       - envoymesh
     expose:
-      - "1999"
-      - "8001"
+      - "1998"
+      - "8002"
     ports:
-      - "1999:1999"
-      - "8001:8001"
+      - "1998:1998"
+      - "8002:8002"
 
   redis:
     build:
@@ -25,9 +25,9 @@ services:
         aliases:
           - redis_server
     expose:
-      - "6379"
+      - "6378"
     ports:
-      - "6379:6379"
+      - "6378:6379"
 
 networks:
   envoymesh: {}
