@@ -12,7 +12,7 @@ git clone git@github.com:CS2552F-DOSA/envoy_with_redis.git
 
 ```bash
 # Run redis prod with envoy
-cd envoy_with_redis/examples/redis-prod
+cd envoy_with_redis/examples/redis
 docker-compose pull
 docker-compose up --build -d
 
@@ -26,14 +26,14 @@ docker-compose up --build -d
 
 ```bash
 # Test for redis prod with envoy
-$ redis-cli -h localhost -p 1999 set foo foo-prod
+$ redis-cli -h localhost -p 1999 set foo foo
 OK
-$ redis-cli -h localhost -p 1999 set bar bar-prod
+$ redis-cli -h localhost -p 1999 set bar bar
 OK
 $ redis-cli -h localhost -p 1999 get foo
-"foo-prod"
+"foo"
 $ redis-cli -h localhost -p 1999 get bar
-"bar-prod"
+"bar"
 
 # Test for redis test with envoy
 $ redis-cli -h localhost -p 1998 set foo foo-test
@@ -53,7 +53,7 @@ $ redis-cli -h localhost -p 1998 get bar
 
 ```bash
 # Stop redis prod with envoy
-cd ../redis-prod
+cd ../redis
 docker-compose down
 
 # Stop redis test with envoy

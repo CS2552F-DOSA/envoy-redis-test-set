@@ -23,7 +23,7 @@ services:
     networks:
       envoymesh:
         aliases:
-          - redis_server_prod
+          - redis_server
     expose:
       - "6379"
     ports:
