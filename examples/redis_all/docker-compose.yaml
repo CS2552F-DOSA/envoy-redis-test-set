@@ -1,0 +1,86 @@
+version: "3.7"
+services:
+
+  # frontend-client configuration need to be changed.
+  frontend-client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    networks:
+      envoymesh:
+        aliases:
+          - frontend-client
+
+  frontend-client-envoy:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontenvoy
+    volumes:
+      - ./front-envoy.yaml:/etc/front-envoy.yaml
+    networks:
+      - envoymesh
+    expose:
+      - "9911"
+      - "8001"
+    ports:
+      - "9911:9911"
+      - "8001:8001"
+
+  redis_proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-backproxy
+    volumes:
+      - ./redis-envoy.yaml:/etc/envoy.yaml
+    networks:
+      envoymesh:
+        aliases:
+          - redis-proxy
+    expose:
+      - "1999"
+      - "8003"
+    ports:
+      - "1999:1999"
+      - "8003:8002"
+
+  redis_test_proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-backproxy
+    volumes:
+      - ./redis-envoy.yaml:/etc/envoy.yaml
+    networks:
+      envoymesh:
+        aliases:
+          - redis_test-proxy
+    expose:
+      - "1998"
+      - "8002"
+    ports:
+      - "1998:1999"
+      - "8002:8002"
+
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile-redis
+    networks:
+      envoymesh:
+        aliases:
+          - redis-service
+    expose:
+      - "6379"
+  
+  redis_test:
+    build:
+      context: .
+      dockerfile: Dockerfile-redis
+    networks:
+      envoymesh:
+        aliases:
+          - redis_test-service
+    expose:
+      - "6379"
+
+networks:
+  envoymesh: {}
