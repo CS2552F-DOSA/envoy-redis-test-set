@@ -12,14 +12,10 @@ git clone git@github.com:CS2552F-DOSA/envoy_with_redis.git
 
 ```bash
 # Run redis prod with envoy
-cd envoy_with_redis/examples/redis
+cd envoy_with_redis/examples/redis_all
 docker-compose pull
 docker-compose up --build -d
 
-# Run redis test with envoy
-cd ../redis-test
-docker-compose pull
-docker-compose up --build -d
 ```
 
 ### Test the connectivity for redis test and redis prod
@@ -52,12 +48,6 @@ $ redis-cli -h localhost -p 1998 get bar
 ### Stop redis prod and redis test
 
 ```bash
-# Stop redis prod with envoy
-cd ../redis
-docker-compose down
-
-# Stop redis test with envoy
-cd ../redis-test
 docker-compose down
 ```
 

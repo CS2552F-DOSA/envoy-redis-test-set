@@ -16,7 +16,6 @@ static_resources:
           prefix_routes:
             catch_all_route:
               cluster: redis_cluster
-
   clusters:
   - name: redis_cluster
     connect_timeout: 1s
@@ -31,7 +30,6 @@ static_resources:
               socket_address:
                 address: redis_server
                 port_value: 6379
-
 admin:
   access_log_path: "/dev/null"
   address:
