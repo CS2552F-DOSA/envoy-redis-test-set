@@ -17,12 +17,7 @@ static_resources:
               - prefix: "redis"
                 cluster: "redis-proxy"
               - prefix: "redis-test"
-                cluster: "redis-test-proxy"
-          # prefix_routes:
-          #   catch_all_route:
-          #     cluster: redis-proxy
-              
-          
+                cluster: "redis-test-proxy"      
 
   clusters:
   - name: redis-proxy
@@ -40,6 +35,7 @@ static_resources:
               socket_address:
                 address: redis-proxy
                 port_value: 1999
+  
   - name: redis-test-proxy
     connect_timeout: 0.25s
     type: logical_dns
@@ -54,7 +50,8 @@ static_resources:
             address:
               socket_address:
                 address: redis-test-proxy
-                port_value: 1998
+                port_value: 1999
+
 admin:
   access_log_path: "/dev/null"
   address:

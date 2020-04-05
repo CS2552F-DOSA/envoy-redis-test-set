@@ -11,8 +11,9 @@ services:
           - redis_server
     expose:
       - "6379"
-    ports:
-      - "6379:6379"
+    # for debuging
+    # ports:
+    #   - "6379:6379"
   
   redis_test:
     build:
@@ -24,8 +25,9 @@ services:
           - redis_test-server
     expose:
       - "6378"
-    ports:
-      - "6378:6379"
+    # for debuging
+    # ports:
+    #   - "6378:6379"
 
   redis-proxy:
     build:
@@ -40,28 +42,30 @@ services:
     expose:
       - "1999"
       - "8002"
-    ports:
-      - "1999:1999"
-      - "8002:8002"
+    # for debuging  
+    # ports:
+      # - "1999:1999"
+      # - "8002:8002"
 
   redis-test-proxy:
     build:
       context: .
       dockerfile: Dockerfile-backenvoy
     volumes:
-      - ./redis-test-envoy.yaml:/etc/envoy.yaml
+      - ./redis-envoy.yaml:/etc/envoy.yaml
     networks:
       envoymesh:
         aliases:
           - redis-test-proxy
     expose:
-      - "1998"
-      - "8003"
-    ports:
-      - "1998:1998"
-      - "8003:8003"
+      - "1999"
+      - "8002"
+    # for debuging
+    # ports:
+      # - "1998:1999"
+      # - "8003:8002"
   
-  # frontend-client configuration need to be changed.
+
   frontend-client:
     build:
       context: .
