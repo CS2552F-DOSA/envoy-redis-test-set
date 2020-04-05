@@ -1,10 +1,10 @@
 # Two options: normal redis client and asyncio-redis
 
-REDIS_HOST = "redis-proxy"
-REDIS_TEST_HOST = "r1"
+REDIS_HOST = "frontend-client-proxy"
+REDIS_TEST_HOST = "frontend-client-proxy"
 
-REDIS_PORT = "1999"
-REDIS_TEST_PORT = "1999"
+REDIS_PORT = "9911"
+REDIS_TEST_PORT = "9911"
 
 # Normal redis client
 # Referring to https://redislabs.com/lp/python-redis/
@@ -27,8 +27,8 @@ r = redis.Redis(
     host= REDIS_HOST,
     port= REDIS_PORT)
 print("set foo in redis, foo -> bar redis")
-r.set('foo', 'bar redis')
-value = r.get('foo')
+r.set('redis:foo', 'bar redis')
+value = r.get('redis:foo')
 print("getted value for foo in redis: ", value)
 print("\n\n")
 
@@ -39,8 +39,8 @@ r_test = redis.Redis(
     host= REDIS_TEST_HOST,
     port= REDIS_TEST_PORT)
 print("set foo in redis-test, foo -> bar redis-test")
-r_test.set('foo', 'bar redis-test')
-value = r_test.get('foo')
+r_test.set('redis-test:foo', 'bar redis-test')
+value = r_test.get('redis-test:foo')
 print("getted value for foo in redis: ", value)
 
 

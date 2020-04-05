@@ -14,10 +14,13 @@ static_resources:
             op_timeout: 5s
           prefix_routes:
             routes:
-              - prefix: "r1"
+              - prefix: "redis"
                 cluster: "redis-proxy"
-              - prefix: "r2"
+              - prefix: "redis-test"
                 cluster: "redis-test-proxy"
+          # prefix_routes:
+          #   catch_all_route:
+          #     cluster: redis-proxy
               
           
 
