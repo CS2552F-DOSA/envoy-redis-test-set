@@ -1,7 +1,7 @@
 # Two options: normal redis client and asyncio-redis
 
 REDIS_HOST = "redis-proxy"
-REDIS_TEST_HOST = "frontend-client-proxy:9911"
+REDIS_TEST_HOST = "r1"
 
 REDIS_PORT = "1999"
 REDIS_TEST_PORT = "1999"
