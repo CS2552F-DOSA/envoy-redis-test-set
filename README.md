@@ -50,8 +50,12 @@ docker-compose down
 
 ### To use custom Envoy version
 
-```
+```bash
+# change envoy docker images in 
+envoy_with_redis/examples/redis_all/Dockerfile-backenvoy
+envoy_with_redis/examples/redis_all/Dockerfile-frontenvoy
 
+# then adjust the filter in yaml files
 ```
 
 
