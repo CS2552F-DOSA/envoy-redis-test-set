@@ -1,31 +1,31 @@
 static_resources:
   listeners:
-  - address:
-      socket_address:
-        address: 0.0.0.0
-        port_value: 9911
-    filter_chains:
-    - filters:
-      - name: envoy.filters.network.http_connection_manager
-        typed_config:
-          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-          stat_prefix: ingress_http
-          codec_type: AUTO
-          route_config:
-            name: local_route
-            virtual_hosts:
-            - name: local_service
-              domains: ["*"]
-              routes:
-              - match: { prefix: "redis" }
-                route: { cluster: redis-proxy }
-              - match: { prefix: "redis-test" }
-                route: { cluster: redis-test-proxy }
-          http_filters:
-            - name: dosa
-              config:
-                cluster: test
-            - name: envoy.filters.http.router
+    - address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 9911
+      filter_chains:
+      - filters:
+        - name: envoy.filters.network.http_connection_manager
+          typed_config:
+            "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+            stat_prefix: ingress_http
+            codec_type: AUTO
+            route_config:
+              name: local_route
+              virtual_hosts:
+              - name: local_service
+                domains: ["*"]
+                routes:
+                - match: { prefix: "redis" }
+                  route: { cluster: redis-proxy }
+                - match: { prefix: "redis-test" }
+                  route: { cluster: redis-test-proxy }
+            http_filters:
+              - name: dosa
+                config:
+                  cluster: test
+              - name: envoy.filters.http.router
   clusters:
   - name: redis-proxy
     connect_timeout: 0.25s
